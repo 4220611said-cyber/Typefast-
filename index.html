@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171329">
+  <meta name="description" content="TypeFast — бесплатный ретро-тренажёр скорости печати на русском языке.">
+  <title>TypeFast — тренажёр печати</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="TypeFast — на главную"><span class="brand-icon">⌨</span> TYPE<span>FAST</span></a>
+    <div class="topbar-right">
+      <div class="top-tag"><span class="status-dot"></span> ТРЕНАЖЁР ГОТОВ</div>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Открыть меню">☰</button>
+    </div>
+  </header>
+  <nav class="site-menu hidden" id="site-menu" aria-label="Секретное меню">
+    <p class="menu-title">СЕКРЕТНЫЙ ТЕРМИНАЛ</p>
+    <label for="secret-code">ВВЕДИ ПРОМОКОД</label>
+    <div class="menu-row"><input id="secret-code" type="text" autocomplete="off" spellcheck="false" placeholder="Промокод"><button class="button primary" id="code-submit" type="button">ВВОД</button></div>
+    <p class="menu-hint" id="menu-hint" aria-live="polite">Попробуй ARSEN или 554.</p>
+    <button class="name-secret" id="arsen-button" type="button">АРСЕН — открыть фото</button>
+  </nav>
+
+  <main class="wrap">
+    <section class="intro">
+      <p class="eyebrow">/// АРКАДНЫЙ РЕЖИМ · RU</p>
+      <h1>ПРОВЕРЬ СВОЮ<br><span>СКОРОСТЬ ПЕЧАТИ</span></h1>
+      <p class="subtitle">60 секунд. Один текст. Твой личный рекорд начинается здесь.</p>
+    </section>
+
+    <section class="game-panel" aria-labelledby="game-title">
+      <div class="panel-head">
+        <h2 id="game-title"><span class="pixel-mark">■</span> СЕАНС ПЕЧАТИ</h2>
+        <span class="session-id">RUN_001</span>
+      </div>
+
+      <div class="stats" aria-live="polite">
+        <div class="stat">
+          <span class="stat-label">СКОРОСТЬ</span>
+          <strong id="wpm">0</strong>
+          <span class="stat-unit">слов / мин</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">ОШИБКИ</span>
+          <strong id="errors">0</strong>
+          <span class="stat-unit">символов</span>
+        </div>
+        <div class="stat timer-stat">
+          <span class="stat-label">ОСТАЛОСЬ</span>
+          <strong id="time">60<span class="seconds">с</span></strong>
+          <span class="stat-unit">обратный отсчёт</span>
+        </div>
+      </div>
+
+      <div class="progress-track" aria-label="Прогресс времени">
+        <div class="progress-fill" id="time-progress"></div>
+      </div>
+
+      <div class="passage" id="passage" aria-label="Текст для перепечатки"></div>
+
+      <label class="sr-only" for="typing-input">Поле для набора текста</label>
+      <textarea id="typing-input" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off"
+        placeholder="Нажми «СТАРТ» или начни печатать..." disabled></textarea>
+
+      <div class="game-actions">
+        <p class="hint" id="hint" aria-live="polite">Нажми «СТАРТ», затем печатай текст. Таймер запустится с первой клавиши.</p>
+        <button id="start-btn" class="button primary" type="button"><span aria-hidden="true">▶</span> СТАРТ</button>
+      </div>
+
+      <div class="result hidden" id="result" role="status" aria-live="polite">
+        <div class="result-icon">★</div>
+        <div>
+          <p class="eyebrow">СЕАНС ЗАВЕРШЁН</p>
+          <h3>ХОРОШАЯ РАБОТА!</h3>
+          <p id="result-copy">Твой результат готов.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="info-card">
+        <span class="card-symbol">01</span>
+        <h3>СКОРОСТЬ</h3>
+        <p>Считаем правильно набранные слова в минуту по введённому тексту.</p>
+      </article>
+      <article class="info-card">
+        <span class="card-symbol">02</span>
+        <h3>ТОЧНОСТЬ</h3>
+        <p>Каждый неверно введённый символ учитывается как ошибка.</p>
+      </article>
+      <article class="info-card">
+        <span class="card-symbol">03</span>
+        <h3>БЕЗ СОХРАНЕНИЯ</h3>
+        <p>Результаты остаются только на этой странице и не отправляются на сервер.</p>
+      </article>
+    </section>
+
+    <footer><span>TYPEFAST.EXE</span><span>СОЗДАНО ДЛЯ ПРАКТИКИ</span><span>© 2026</span></footer>
+  </main>
+
+  <div class="modal hidden" id="bike-modal" role="dialog" aria-modal="true" aria-labelledby="bike-title"><div class="modal-card poster-card"><div class="modal-head"><h2 id="bike-title">ARSEN // KING ВЕЛОСИПЕДОВ</h2><button class="modal-close" type="button" data-close="bike-modal" aria-label="Закрыть">×</button></div><img class="poster-image" src="assets/bike-poster.png" alt="Зелёная ретро-граффити афиша с человеком и бирюзовым велосипедом"></div></div>
+  <div class="modal hidden" id="creator-modal" role="dialog" aria-modal="true" aria-labelledby="creator-title"><div class="modal-card poster-card"><div class="modal-head"><h2 id="creator-title">THE CREATOR // A-FI-Z-K</h2><button class="modal-close" type="button" data-close="creator-modal" aria-label="Закрыть">×</button></div><img class="poster-image" src="assets/creator-poster.png" alt="Синяя ретро-граффити афиша The Creator"></div></div>
+  <div class="modal hidden" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-title"><div class="modal-card"><div class="modal-head"><h2 id="video-title">СЕКРЕТНЫЙ ВИДЕОКАНАЛ</h2><button class="modal-close" type="button" data-close="video-modal" aria-label="Закрыть видео">×</button></div><video id="developer-video" controls playsinline preload="metadata"><source src="assets/developer-video.mp4" type="video/mp4">Браузер не поддерживает видео.</video><p class="modal-note">Закрой видео, чтобы увидеть зелёную афишку.</p></div></div>
+</body>
+</html>
